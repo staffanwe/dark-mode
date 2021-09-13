@@ -4,7 +4,12 @@ export const UserContext = createContext();
 
 const UserContextProvider = (props) => {
   const [user, setUser] = useState();
-  return <UserContext.Provider value={{ user, setUser }}>{props.children}</UserContext.Provider>;
+  const [mode, setMode] = useState(Math.round(Math.random()) === 1 ? 'dark' : 'light');
+
+  const toggleMode = () => {
+    setMode(mode === 'dark' ? 'light' : 'dark');
+  };
+  return <UserContext.Provider value={{ user, setUser, mode, toggleMode }}>{props.children}</UserContext.Provider>;
 };
 
 export default UserContextProvider;
