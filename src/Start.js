@@ -51,6 +51,9 @@ export const Start = () => {
   const classes = useStyles();
   const [stage, setStage] = useState(0);
   const [alias, setAlias] = useState('');
+  const [vision, setVision] = useState('');
+  const [computer, setComputer] = useState(null);
+  const [experience, setExperience] = useState(null);
   const [age, setAge] = useState('');
   const [aliasError, setAliasError] = useState(false);
   const [ageError, setAgeError] = useState(false);
@@ -85,6 +88,9 @@ export const Start = () => {
       alias: alias,
       age: age,
       gender: gender,
+      vision: vision,
+      computer: computer,
+      experience: experience,
       result: testResults,
       answers: { difficulty, difference, preference },
     };
@@ -156,7 +162,55 @@ export const Start = () => {
                 <FormControlLabel value="other" classes={{ label: classes.label }} control={<Radio />} label="Other" />
               </RadioGroup>
             </FormControl>
-
+            <FormLabel component="legend" style={{ textAlign: 'left' }}>
+              Do you have any kind of impaired vision? If you do, what kind?
+            </FormLabel>
+            <TextField
+              className={classes.field}
+              label=""
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              onChange={(e) => setVision(e.target.value)}
+            />
+            <FormControl className={classes.field} component="fieldset">
+              <FormLabel component="legend">
+                How much do you use a computer? (1 = Almost nothing, 5 = All day)
+              </FormLabel>
+              <RadioGroup
+                aria-label="computer"
+                name="gender1"
+                value={computer}
+                row
+                style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+                onChange={(e) => setComputer(e.target.value)}
+              >
+                <FormControlLabel value="1" classes={{ label: classes.label }} control={<Radio />} label="1" />
+                <FormControlLabel value="2" classes={{ label: classes.label }} control={<Radio />} label="2" />
+                <FormControlLabel value="3" classes={{ label: classes.label }} control={<Radio />} label="3" />
+                <FormControlLabel value="4" classes={{ label: classes.label }} control={<Radio />} label="4" />
+                <FormControlLabel value="5" classes={{ label: classes.label }} control={<Radio />} label="5" />
+              </RadioGroup>
+            </FormControl>
+            <FormControl className={classes.field} component="fieldset">
+              <FormLabel component="legend">
+                How would you rate your experience with dark mode? (1 = Never used it, 5 = Uses it all the time)
+              </FormLabel>
+              <RadioGroup
+                aria-label="experience"
+                name="gender1"
+                value={experience}
+                row
+                style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+                onChange={(e) => setExperience(e.target.value)}
+              >
+                <FormControlLabel value="1" classes={{ label: classes.label }} control={<Radio />} label="1" />
+                <FormControlLabel value="2" classes={{ label: classes.label }} control={<Radio />} label="2" />
+                <FormControlLabel value="3" classes={{ label: classes.label }} control={<Radio />} label="3" />
+                <FormControlLabel value="4" classes={{ label: classes.label }} control={<Radio />} label="4" />
+                <FormControlLabel value="5" classes={{ label: classes.label }} control={<Radio />} label="5" />
+              </RadioGroup>
+            </FormControl>
             <Button type="submit" variant="contained" color="primary" disabled={emptyFields()}>
               Continue
             </Button>
@@ -170,7 +224,7 @@ export const Start = () => {
         <Box className={classes.content}>
           <Typography variant="h5" color="textPrimary">
             You will now be given a number of tasks where you will be presented a word. All you got to do is find the
-            word in the grid below and click it. Ready?{' '}
+            word in the grid as fast as you can and click it. Ready?{' '}
           </Typography>
           <Button style={{ marginTop: '50px' }} variant="contained" color="primary" onClick={startTest}>
             Ready
