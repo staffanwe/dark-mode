@@ -82,7 +82,7 @@ export const Start = () => {
     }
   };
 
-  const handleResultSubmit = (e) => {
+  const handleResultSubmit = async (e) => {
     e.preventDefault();
     const total = {
       alias: alias,
@@ -95,9 +95,9 @@ export const Start = () => {
       answers: { difficulty, difference, preference },
     };
     console.log('FINAL: ', total);
-    setStage(4);
-
-    axios.post('https://secure-ocean-83743.herokuapp.com/api/result', total).then(setStage(5));
+    setStage(5);
+    const res = await axios.post('https://secure-ocean-83743.herokuapp.com/api/result', total);
+    console.log('res', res);
   };
 
   const emptyFields = () => alias === '' || age === '';
@@ -138,6 +138,7 @@ export const Start = () => {
               fullWidth
               required
               error={ageError}
+              type="number"
               onChange={(e) => setAge(e.target.value)}
             />
 
